@@ -135,6 +135,14 @@ local keymap = {
             }
         },
         {
+            key={'<CS-P>', '<leader>sm'},
+            mode='n',
+            func=tscope.keymaps,
+            opts={
+                desc="[s]earch key [m]aps",
+            }
+        },
+        {
             key={'<F1>', '<leader>sh'},
             mode='n',
             func=tscope.help_tags,
