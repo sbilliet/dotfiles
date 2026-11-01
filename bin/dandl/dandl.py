@@ -29,6 +29,11 @@ def get_cur_mode():
     }
     return tlb[color_scheme_val]
 
+def set_gtk3_theme(mode):
+    gtk3_theme = config.get(f'{mode}', 'gtk3_theme')
+    de_iface_settings = Gio.Settings(schema='org.gnome.desktop.interface')
+    de_iface_settings.set_string('gtk-theme', gtk3_theme)
+
 def set_toolkit_mode(mode):
     # In the future implementation for a dbus org.freedesktop path might get added
     # However at the moment, we need to do this for each toolkit/DE individually.
@@ -91,6 +96,7 @@ config.read(config_path)
 
 # Set up org.freedesktop.appearance (through gnomes interface)
 set_toolkit_mode(args.mode)
+set_gtk3_theme(args.mode)
 
 # Swap over colors pointed to by .color.d so that clients who include via the color symlink get the correct variant
 os.unlink(f'{homedir}/.color.d')
